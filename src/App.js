@@ -3,6 +3,7 @@ import RenderProps from './component/react16.2.0/renderProps/renderProps3';//ren
 import LifeCycle from './component/react16.3.0/lifecycle';//lifecycle
 import Refs from './component/react16.3.0/Refs/refs4';
 import ForwardingRefs from './component/react16.3.0/ForwardingRefs/Example4';
+import Optimizing from './component/api/optimizing-performance/Purecomponent'
 
 export default class App extends Component {
   render() {
@@ -12,7 +13,8 @@ export default class App extends Component {
         {/* <MouseTracker /> */}
         {/* <LifeCycle /> */}
         {/* <Refs /> */}
-        <ForwardingRefs></ForwardingRefs>
+        {/* <ForwardingRefs></ForwardingRefs> */}
+        <Optimizing />
       </div>
     )
   }

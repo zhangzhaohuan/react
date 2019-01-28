@@ -1,8 +1,8 @@
 
- /**
- * react16.3后生命周期
- * 简书：https://www.jianshu.com/p/ae26190657ca
- */
+/**
+* react16.3后生命周期
+* 简书：https://www.jianshu.com/p/ae26190657ca
+*/
 import React, { Component } from 'react';
 
 export default class Father extends Component {
@@ -32,8 +32,8 @@ class Child extends Component {
   constructor(props) {
     console.log('constructor');
     super(props);
-    this.state={
-      count:10
+    this.state = {
+      count: 10
     }
   }
 
@@ -52,6 +52,8 @@ class Child extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log('shouldComponentUpdate');
+    console.log(nextProps);
+    console.log(nextState);
     return true;
   }
 
@@ -74,6 +76,8 @@ class Child extends Component {
         子元素:
         <br />
         父组件属性count值: {this.props.count}
+        <br />
+        子组件属性count值: {this.state.count}
         <br />
         <span onClick={() => this.props.handleClick()}
           style={{ display: "inline-block", padding: "3px 5px", color: "#ffffff", background: "green", borderRadius: "3px", cursor: "pointer" }}
