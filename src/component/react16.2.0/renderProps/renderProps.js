@@ -2,6 +2,9 @@
  * render prop 
  * 解释：A component with a render prop takes a function that returns a React element and calls it instead of implementing its own render logic.
  */
+/**
+ * render props：props的属性是个函数，并告诉react应该渲染什么
+ */
 import React from 'react';
 class Cat extends React.Component {
   render() {

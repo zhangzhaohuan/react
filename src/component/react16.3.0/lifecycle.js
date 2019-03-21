@@ -7,11 +7,23 @@ import React, { Component } from 'react';
 
 export default class Father extends Component {
   constructor(props) {
+    console.log('Father constructor');
     super(props);
     this.state = {
       count: 1
     }
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log('Father getDerivedStateFromProps');
+    return {
+      count: nextProps.count * 2,
+    };
+  }
+
+  componentDidMount() {
+    console.log('father didmount');
   }
 
   handleClick() {
