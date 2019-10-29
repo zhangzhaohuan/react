@@ -5,6 +5,7 @@ import React, { Component } from 'react'
  * 
  * 结论: this.state.age 并不能触发render()
  */
+
 export default class State1 extends Component {
     constructor() {
         super();

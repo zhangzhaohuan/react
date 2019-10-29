@@ -8,6 +8,13 @@ import ForwardingRefs from './component/react16.3.0/ForwardingRefs/Example4';
 import Optimizing from './component/api/optimizing-performance/Purecomponent';
 import Hoc from './component/api/hoc';
 import State from './component/api/state'
+import Props from './component/api/props'
+import Props2 from './component/api/props/index2';
+
+import Wcag from './component/api/wcag';
+
+
+
 
 
 
@@ -17,13 +24,19 @@ export default class App extends Component {
       <div>
         {/* <RenderProps /> */}
         {/* <MouseTracker /> */}
-        <LifeCycle />
+        {/* <LifeCycle /> */}
         <br />
         {/* <State /> */}
         {/* <Refs /> */}
         {/* <ForwardingRefs></ForwardingRefs> */}
-        <Optimizing />
+        {/* <Optimizing /> */}
         {/* <Hoc /> */}
+        {/* {<Props />} */}
+        {/* {<Props2 />} */}
+
+        {<Wcag />}
+
+        
       </div>
     )
   }
