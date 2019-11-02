@@ -32,9 +32,9 @@ export default class App extends Component {
         {/* <Optimizing /> */}
         {/* <Hoc /> */}
         {/* {<Props />} */}
-        {/* {<Props2 />} */}
+        {<Props2 />}
 
-        {<Wcag />}
+        {/* {<Wcag />} */}
 
         
       </div>

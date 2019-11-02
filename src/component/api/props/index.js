@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 
 /**
  * 条件：Component、props[基本数据类型]
- * 当父元素render时，子元素重新render。
+ * 当父元素setState[无论值是否变化]：父元素render->子元素重新render。
  * 
  * 条件：Component、props[复杂数据类型]
- * 当父元素render时，子元素重新render。
+ * 当父元素setState[无论值是否变化]，子元素重新render。
  */
-class Father extends Component {
+class Child extends Component {
     componentWillReceiveProps() {
         console.log('componentWillReceiveProps');
 
@@ -28,13 +28,19 @@ class Father extends Component {
 
 
     render() {
-        console.log('render');
+        console.log('子组件render');
 
         return (
-            <div>
-                {this.props.name}
-                {this.props.complex.age}
-            </div>
+            <Fragment>
+                <h3>子组件：</h3>
+                <div>
+                    {this.props.name}
+                </div>
+                <div>
+
+                    {this.props.complex.age}
+                </div>
+            </Fragment>
         )
     }
 }
@@ -50,22 +56,54 @@ export default class Index extends Component {
         }
     }
     render() {
+        console.log('父组件render');
         return (
             <div>
+                <h3>父组件</h3>
+                <div>基本数据类型：{this.state.basic}</div>
                 <button onClick={() => {
                     this.setState({
-                        basic: 'zhangsan'
+                        basic: 'zhangsan1'
                     });
-                }}>改变基本数据类型的值</button>
+                }}>改变</button>
                 <button onClick={() => {
-                    let obj = this.state.complex;
-                    obj.age += 1;
+                    this.setState((state) => ({
+                        basic: state.basic
+                    }))
+                    // this.setState({
+                    //     basic: 'zhangsan'
+                    // });
+                }}>不变</button>
+
+
+                <div>复杂数据类型：</div>
+                <button onClick={() => {
+                    this.state.complex.age += 1;
                     this.setState({
-                    complex: obj
-            });
-                }}>改变复杂数据类型的值</button>
-            <Father name={this.state.basic} complex={this.state.complex} />
-           
+                        complex: this.state.complex
+                    });
+                }}>不改变指针,改值</button>
+                <button onClick={() => {
+                    let obj = {};
+                    obj.age = this.state.complex.age
+                    this.setState({
+                        complex: obj
+                    });
+                }}>改变指针，不改值</button>
+                <button onClick={() => {
+                    let obj = {};
+                    obj.age = this.state.complex.age + 1
+                    this.setState({
+                        complex: obj
+                    });
+                }}>改变指针并改值</button>
+                <button onClick={() => {
+                    this.setState({
+                        complex: this.state.complex
+                    });
+                }}>不变</button>
+                <Child name={this.state.basic} complex={this.state.complex} />
+
             </div >
         )
     }
