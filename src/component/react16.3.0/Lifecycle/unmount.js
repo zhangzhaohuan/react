@@ -1,8 +1,11 @@
 
 /**
-* react16.3后生命周期
-* 简书：https://www.jianshu.com/p/ae26190657ca
+* react16.3后生命周期 unmounting阶段
+* componentWillUnmount的触方式
+1. 组件在父组件中被移除了
+2. 组件中设置了 key 属性，父组件在 render 的过程中，发现 key 值和上一次不一致，那么这个组件就会被干掉。
 */
+import { Button } from 'antd';
 import React, { Component } from 'react';
 
 export default class Father extends Component {
@@ -10,15 +13,18 @@ export default class Father extends Component {
     console.log('Father constructor');
     super(props);
     this.state = {
-      count: 1
+      count: 1,
+      key: 1,
     }
     this.handleClick = this.handleClick.bind(this);
+    this.changeKey = this.changeKey.bind(this);
+
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     console.log('Father getDerivedStateFromProps');
     return {
-      count: nextProps.count * 2,
+      count: prevState.count * 2,
     };
   }
 
@@ -32,10 +38,25 @@ export default class Father extends Component {
     }))
   }
 
+  changeKey(){
+    this.setState((prevState, props)=>({
+      key:prevState.key + 1
+    }))
+  }
+
   render() {
+    console.log('father render');
     return (
       <div style={{ border: "1px solid blue" }}>
-        <Child count={this.state.count} handleClick={this.handleClick} />
+        {
+          <span onClick={this.changeKey}
+            style={{ display: "inline-block", padding: "3px 5px", color: "#ffffff", background: "green", borderRadius: "3px", cursor: "pointer" }}
+          >方式二：changeKey</span>
+        }
+        {
+          this.state.count <= 2 && <Child key={this.state.key} count={this.state.count} handleClick={this.handleClick} />
+        }
+
       </div>
     )
   }
@@ -45,7 +66,7 @@ class Child extends Component {
     console.log('constructor');
     super(props);
     this.state = {
-      count: 10
+      count: 10,
     }
   }
 
@@ -81,8 +102,12 @@ class Child extends Component {
     console.log(snapshot);
   }
 
+  componentWillUnmount() {
+    console.log('componentWillUnmount');
+  }
+
   render() {
-    console.log('render');
+    console.log('child render');
     return (
       <div style={{ margin: "15px", border: "1px solid red" }}>
         子元素:
@@ -93,7 +118,7 @@ class Child extends Component {
         <br />
         <span onClick={() => this.props.handleClick()}
           style={{ display: "inline-block", padding: "3px 5px", color: "#ffffff", background: "green", borderRadius: "3px", cursor: "pointer" }}
-        >click me</span>
+        >方式一：click me</span>
       </div>
     )
   }
